@@ -9,20 +9,33 @@
     :root{--primary:#0d47a1;--accent:#2196f3;--card-bg:#fff}
     *{box-sizing:border-box}
     body{font-family:'Poppins',sans-serif;margin:0;min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#e8f3ff 0%, #f7fbff 100%);}
+    
     header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.06);position:sticky;top:0;z-index:20}
     .logo{display:flex;align-items:center;gap:12px}
     .logo img{height:44px}
     nav a{margin-left:14px;text-decoration:none;color:#333;font-weight:600}
     nav a.cta{background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px}
+
     .hero{text-align:center;padding:60px 20px;background:linear-gradient(120deg,var(--primary),var(--accent));color:#fff}
     .hero h1{margin:0;font-size:34px}
     .hero p{margin:8px 0 0 0;opacity:0.95}
-    .card{width:100%;max-width:520px;margin:-36px auto 40px;background:var(--card-bg);padding:24px;border-radius:14px;box-shadow:0 10px 30px rgba(13,71,161,0.12);text-align:center}
+
+    .blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1000px;margin:40px auto;padding:0 20px}
+    .block{background:#fff;padding:20px;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,0.08);text-align:center}
+    .block h3{margin-top:0;color:var(--primary)}
+
+    .card{width:100%;max-width:520px;margin:40px auto;background:var(--card-bg);padding:24px;border-radius:14px;box-shadow:0 10px 30px rgba(13,71,161,0.12);text-align:center}
     input[type=file]{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd}
     button{width:100%;padding:12px;border-radius:8px;border:none;background:var(--primary);color:#fff;font-weight:600;cursor:pointer;margin-top:12px}
     #preview{max-width:100%;margin-top:12px;border-radius:8px;display:none}
     #downloadLink{display:none;margin-top:12px;padding:10px 14px;border-radius:8px;background:#2e7d32;color:#fff;text-decoration:none;font-weight:600}
+
+    /* Footer */
     footer{margin-top:auto;padding:18px;text-align:center;color:#666;background:#f5f7fb}
+
+    /* Ad image hover effect */
+    #ad-container a img{transition: transform 0.3s; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
+    #ad-container a:hover img{transform: scale(1.05);}
   </style>
 </head>
 <body>
@@ -36,7 +49,9 @@
       <a href="#">Home</a>
       <a href="#">About</a>
       <a href="#">Converter</a>
-      <a class="cta" href="#">Contact</a>
+      <a href="#">Contact</a>
+      <a href="#">Sign In</a>
+      <a class="cta" href="#">Login</a>
     </nav>
   </header>
 
@@ -45,6 +60,15 @@
     <p>Convert PNG, JPG, JPEG to WebP instantly — No signup required.</p>
   </section>
 
+  <!-- Rotating YouTube Video Ads Start -->
+  <div id="ad-container" style="text-align:center; margin:20px 0;">
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+      <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" alt="YouTube Video Ad">
+    </a>
+  </div>
+  <!-- Rotating YouTube Video Ads End -->
+
+  <!-- Converter Card -->
   <div class="card">
     <h2>Upload your image</h2>
     <input id="fileInput" type="file" accept="image/*">
@@ -53,9 +77,10 @@
     <a id="downloadLink">Download .webp</a>
   </div>
 
-  <footer>© 2025 Image Converter | Built with ❤️ by Shikha</footer>
+  <footer>© 2025 Image Converter | Built with ❤️ by Astha</footer>
 
   <script>
+    // Image Converter JS
     const input = document.getElementById('fileInput');
     const preview = document.getElementById('preview');
     const convertBtn = document.getElementById('convertBtn');
@@ -92,6 +117,25 @@
       };
       img.src = preview.src;
     });
+
+    // Rotating YouTube Video Ads JS
+    const ads = [
+      { link: "https://www.youtube.com/watch?v=qgL95eEkobM", img: "https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" },
+      { link: "https://www.youtube.com/watch?v=3JZ_D3ELwOQ", img: "https://img.youtube.com/vi/3JZ_D3ELwOQ/0.jpg" },
+      { link: "https://www.youtube.com/watch?v=L_jWHffIx5E", img: "https://img.youtube.com/vi/L_jWHffIx5E/0.jpg" }
+    ];
+
+    let index = 0;
+    const adContainer = document.getElementById("ad-container");
+    const adLink = adContainer.querySelector("a");
+    const adImage = adContainer.querySelector("img");
+
+    setInterval(() => {
+      index = (index + 1) % ads.length;
+      adLink.href = ads[index].link;
+      adImage.src = ads[index].img;
+    }, 5000); // 5 seconds rotation
   </script>
+
 </body>
 </html>
